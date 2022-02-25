@@ -113,14 +113,15 @@ class Goblin(GameCharacter):
         self._name = "Goblin"
         self._character = "G"
 
-    # TODO: damage getter
+    # damage getter
+    def get_damage(self):
+        return self.damage
 
     def act(self, map):
         # TODO: act method of a Goblin
         nextMove = self._actions[self._cur_act % len(self._actions)]
         nextPos = self.cmd_to_pos(nextMove)
-        # TODO: DOING
-        nextCell = map.
+        nextCell = map.getCe
 
         # get the next cell according to _actions and _cur_act
         if:  # condition:
