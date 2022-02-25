@@ -13,13 +13,13 @@ class Cell:
         self._color = None
         self._hours = 0
 
-    # TODO: hours getter
+    # hours getter
     def get_hours(self):
         return self._hours
 
     def set_occupant(self, obj):
-        # TODO: set occupant for the Plain cell
-        #       return whether success or not
+        # set occupant for the Plain cell
+        #      return whether success or not
         if self.occupant() == null:
             self._occupant = obj
             return true
@@ -32,19 +32,19 @@ class Cell:
                     return false
             else:
                 return false
-        # END TODO
+        # END
 
     def remove_occupant(self):
-        # TODO: remove the occupant
+        # remove the occupant
         self._occupant = null
-        # END TODO
+        # END
 
     @property
     def occupant(self):
         return self._occupant
 
     def display(self):
-        # TODO: print a string to display the cell
+        # print a string to display the cell
         #       and the occupant in the cell
         if self.occupant != null:
             if isinstance(self.occupant, GameCharacter):
@@ -56,7 +56,7 @@ class Cell:
                           ((Trap.occupant).display(), self.color))
         else:
             print("%s   \033[0m   ", self.color)
-        # END TODO
+        # END
 
 
 class Plain(Cell):
@@ -72,9 +72,9 @@ class Mountain(Cell):
         self._color = '\033[1;37;47m'
 
     def set_occupant(self, obj):
-        # TODO: return False
+        # return False
         return false
-        # END TODO
+        # END
 
 
 class Swamp(Cell):

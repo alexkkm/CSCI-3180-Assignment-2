@@ -1,6 +1,8 @@
 from tables import Col
 from abc import abstractmethod
-from Map import Map
+
+
+from sqlalchemy import false, null, true
 
 
 class GameCharacter:
@@ -13,34 +15,34 @@ class GameCharacter:
         self._character = None
         self._color = "\033[1;31m"
 
-    # : name getter
-    def getName(self):
+    # name getter
+    def get_name(self):
         return self.name
 
-    # : row getter
+    # row getter
 
-    def getRow(self):
+    def get_row(self):
         return self.row
 
-    # : col getter
+    # col getter
 
-    def getCol(self):
+    def get_col(self):
         return self.col
 
-    # : active getter and setter
+    # active getter and setter
 
-    def getActive(self):
+    def get_active(self):
         return self.active
 
-    def setActive(self, active):
+    def set_active(self, active):
         self.active = active
 
-    # : occupying getter and setter
+    # occupying getter and setter
 
-    def getOccupying(self):
+    def get_occupying(self):
         return self.occupying
 
-    def setOccupying(self, cell):
+    def set_occupying(self, cell):
         self.occupying = cell
 
     def cmd_to_pos(self, char):
@@ -80,9 +82,19 @@ class Player(GameCharacter):
         self._name = "Player"
         self._character = "A"
 
-    # TODO: hp getter and setter
+    #  hp getter and setter
+    def get_hp(self):
+        return self.hp
 
-    # TODO: oxygen getter and setter
+    def set_hp(self, h):
+        self.hp = h
+
+    #  oxygen getter and setter
+    def get_oxygen(self):
+        return self.oxygen
+
+    def set_oxygen(self, o):
+        self.oxygen = o
 
     def act(self, map):
         next_cell = None
@@ -99,9 +111,12 @@ class Player(GameCharacter):
         if comer.name == "Goblin":
             print(
                 '\033[1;31;46mPlayer meets a Goblin! Player\'s HP - %d.\033[0m' % (comer.damage))
-            # TODO: interact_with method
-
-            # END TODO
+            # interact_with method
+            self.hp = self.hp-comer.getDamage()
+            return false
+        else:
+            return false
+            # END
 
 
 class Goblin(GameCharacter):
@@ -118,16 +133,21 @@ class Goblin(GameCharacter):
         return self.damage
 
     def act(self, map):
-        # TODO: act method of a Goblin
+        # act method of a Goblin
         nextMove = self._actions[self._cur_act % len(self._actions)]
         nextPos = self.cmd_to_pos(nextMove)
-        nextCell = map.getCe
+        nextCell = map.get_cell(nextPos[0], nextPos[1])
 
         # get the next cell according to _actions and _cur_act
-        if:  # condition:
-        print("\033[1;31;46mGoblin enters the cell (%d, %d).\033[0;0m" %
-              (self._row, self._col))
-        # END TODO
+        if (nextCell != null and nextCell.set_occupant(self)):  # condition:
+            self._cur_act += 1
+            self._row = nextPos[0]
+            self._col = nextPos[1]
+            self.occupying.remove_occupant()
+            self.set_occupying(nextCell)
+            print("\033[1;31;46mGoblin enters the cell (%d, %d).\033[0;0m" %
+                  (self._row, self._col))
+        # END
 
     # return whether comer entering the cell successfully or not
     def interact_with(self, comer):
@@ -136,7 +156,10 @@ class Goblin(GameCharacter):
                 "\033[1;31;46mA goblin at cell (%d, %d) meets Player. The goblin died. Player's HP - 1.\033[0;0m"
                 % (self._row, self._col)
             )
-            # TODO: update properties of the player and the Goblin
+            # update properties of the player and the Goblin
             #       return whether the Player successfully enter the cell
-
-            # END TODO
+            comer.set_hp(comer.get_hp-self._damage)
+            self.set_active(false)
+            return true
+        return false
+        # END
