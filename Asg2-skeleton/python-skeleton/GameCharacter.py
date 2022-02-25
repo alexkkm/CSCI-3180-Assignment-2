@@ -1,3 +1,8 @@
+from tables import Col
+from abc import abstractmethod
+from Map import Map
+
+
 class GameCharacter:
     def __init__(self, row, col):
         self._row = row
@@ -5,22 +10,38 @@ class GameCharacter:
         self._occupying = None
         self._name = None
         self._active = True
-        self._character = None 
+        self._character = None
         self._color = "\033[1;31m"
-    
-    #TODO: name getter
 
-    
-    #TODO: row getter
+    # : name getter
+    def getName(self):
+        return self.name
 
+    # : row getter
 
-    #TODO: col getter
+    def getRow(self):
+        return self.row
 
-    
-    #TODO: active getter and setter
+    # : col getter
 
+    def getCol(self):
+        return self.col
 
-    #TODO: occupying getter and setter
+    # : active getter and setter
+
+    def getActive(self):
+        return self.active
+
+    def setActive(self, active):
+        self.active = active
+
+    # : occupying getter and setter
+
+    def getOccupying(self):
+        return self.occupying
+
+    def setOccupying(self, cell):
+        self.occupying = cell
 
     def cmd_to_pos(self, char):
         next_pos = [self._row, self._col]
@@ -45,9 +66,9 @@ class GameCharacter:
         pass
 
     def display(self):
-        # TODO: return _color followed by _character for displaying 
-
-        # END TODO 
+        # TODO: return _color followed by _character for displaying
+        return
+        # END TODO
 
 
 class Player(GameCharacter):
@@ -59,28 +80,28 @@ class Player(GameCharacter):
         self._name = "Player"
         self._character = "A"
 
-    #TODO: hp getter and setter
+    # TODO: hp getter and setter
 
-
-    #TODO: oxygen getter and setter
-    
+    # TODO: oxygen getter and setter
 
     def act(self, map):
         next_cell = None
         next_pos = [0, 0]
         while next_cell == None:
-            action = input("Next move (U, D, R, L): ".format(self._row, self._col))
-            # TODO: act method 
+            action = input("Next move (U, D, R, L): ".format(
+                self._row, self._col))
+            # TODO: act method
 
-            # END TODO 
+            # END TODO
 
     # return whether comer entering the cell successfully or not
     def interact_with(self, comer):
         if comer.name == "Goblin":
-            print('\033[1;31;46mPlayer meets a Goblin! Player\'s HP - %d.\033[0m' %(comer.damage))
-             # TODO: interact_with method 
+            print(
+                '\033[1;31;46mPlayer meets a Goblin! Player\'s HP - %d.\033[0m' % (comer.damage))
+            # TODO: interact_with method
 
-            # END TODO 
+            # END TODO
 
 
 class Goblin(GameCharacter):
@@ -92,14 +113,20 @@ class Goblin(GameCharacter):
         self._name = "Goblin"
         self._character = "G"
 
-    #TODO: damage getter
+    # TODO: damage getter
 
     def act(self, map):
-        # TODO: act method of a Goblin 
+        # TODO: act method of a Goblin
+        nextMove = self._actions[self._cur_act % len(self._actions)]
+        nextPos = self.cmd_to_pos(nextMove)
+        # TODO: DOING
+        nextCell = map.
+
         # get the next cell according to _actions and _cur_act
-        if #condition: 
-            print("\033[1;31;46mGoblin enters the cell (%d, %d).\033[0;0m" % (self._row, self._col))
-        # END TODO 
+        if:  # condition:
+        print("\033[1;31;46mGoblin enters the cell (%d, %d).\033[0;0m" %
+              (self._row, self._col))
+        # END TODO
 
     # return whether comer entering the cell successfully or not
     def interact_with(self, comer):
@@ -108,7 +135,7 @@ class Goblin(GameCharacter):
                 "\033[1;31;46mA goblin at cell (%d, %d) meets Player. The goblin died. Player's HP - 1.\033[0;0m"
                 % (self._row, self._col)
             )
-            # TODO: update properties of the player and the Goblin 
-            #       return whether the Player successfully enter the cell 
+            # TODO: update properties of the player and the Goblin
+            #       return whether the Player successfully enter the cell
 
             # END TODO

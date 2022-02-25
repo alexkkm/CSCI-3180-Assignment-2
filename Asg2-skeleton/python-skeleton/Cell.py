@@ -1,7 +1,8 @@
 from abc import abstractmethod
-from sqlalchemy import null, true
+from sqlalchemy import false, null, true
 
 from GameCharacter import GameCharacter
+from Trap import Trap
 
 
 class Cell:
@@ -13,6 +14,8 @@ class Cell:
         self._hours = 0
 
     # TODO: hours getter
+    def get_hours(self):
+        return self._hours
 
     def set_occupant(self, obj):
         # TODO: set occupant for the Plain cell
@@ -21,9 +24,14 @@ class Cell:
             self._occupant = obj
             return true
         else:
-            if isinstance(self.occupant(), GameCharacter):
-                if GameCharacter.interact_with(obj)
-
+            if isinstance(self.occupant, GameCharacter):
+                if GameCharacter.interact_with(obj):
+                    self.occupant = obj
+                    return true
+                else:
+                    return false
+            else:
+                return false
         # END TODO
 
     def remove_occupant(self):
@@ -38,7 +46,16 @@ class Cell:
     def display(self):
         # TODO: print a string to display the cell
         #       and the occupant in the cell
-
+        if self.occupant != null:
+            if isinstance(self.occupant, GameCharacter):
+                print("%s %s%s \033[0m   ", self.color, ((
+                    GameCharacter.occupant).display(), self.color))
+            else:
+                if isinstance(self.occupant, Trap):
+                    print("%s %s%s \033[0m   ", self.color,
+                          ((Trap.occupant).display(), self.color))
+        else:
+            print("%s   \033[0m   ", self.color)
         # END TODO
 
 
@@ -56,7 +73,7 @@ class Mountain(Cell):
 
     def set_occupant(self, obj):
         # TODO: return False
-
+        return false
         # END TODO
 
 
