@@ -4,7 +4,7 @@ public class Player extends GameCharacter {
 	private int hp;
 	private int oxygen;
 	private char[] validActions;
-	
+
 	public Player(int row, int col, int hp, int oxygen) {
 		super(row, col);
 		validActions = new char[4];
@@ -21,11 +21,11 @@ public class Player extends GameCharacter {
 	public int getOxygen() {
 		return this.oxygen;
 	}
-	
+
 	public int getHp() {
 		return this.hp;
 	}
-	
+
 	public void setHp(int h) {
 		this.hp = h;
 	}
@@ -33,7 +33,7 @@ public class Player extends GameCharacter {
 	public void setOxygen(int o) {
 		this.oxygen = o;
 	}
-	
+
 	@Override
 	public void act(Map map) {
 		Cell nextCell = null;
@@ -53,14 +53,15 @@ public class Player extends GameCharacter {
 						break;
 					}
 				}
-				if (inputString.length() > 1) correctAct = false;
+				if (inputString.length() > 1)
+					correctAct = false;
 				if (!correctAct) {
 					System.out.printf("Invalid command. Please enter one of {U, D, R, L}.%n");
 				} else {
 					nextPos = this.cmd2Pos(nextAct);
 				}
-			} while(!correctAct);
-			
+			} while (!correctAct);
+
 			nextCell = map.getCell(nextPos[0], nextPos[1]);
 			if (nextCell != null && nextCell.setOccupant(this)) {
 				this.row = nextPos[0];
@@ -73,13 +74,14 @@ public class Player extends GameCharacter {
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean interactWith(GameCharacter comer) {
 		if (comer.name.equals("Goblin")) {
-			System.out.printf("\033[1;31;46mPlayer meets a Goblin! Player's HP - %d.\033[0m%n", ((Goblin)comer).getDamage());
-			this.hp -= ((Goblin)comer).getDamage();
-			((Goblin)comer).setActive(false);
+			System.out.printf("\033[1;31;46mPlayer meets a Goblin! Player's HP - %d.\033[0m%n",
+					((Goblin) comer).getDamage());
+			this.hp -= ((Goblin) comer).getDamage();
+			((Goblin) comer).setActive(false);
 			return false;
 		}
 		return false;

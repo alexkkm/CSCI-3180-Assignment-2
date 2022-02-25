@@ -68,9 +68,9 @@ class GameCharacter:
         pass
 
     def display(self):
-        # TODO: return _color followed by _character for displaying
-        return
-        # END TODO
+        # return _color followed by _character for displaying
+        return self._color+self._character
+        # END
 
 
 class Player(GameCharacter):

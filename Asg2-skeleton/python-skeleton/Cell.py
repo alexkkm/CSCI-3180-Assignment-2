@@ -48,14 +48,14 @@ class Cell:
         #       and the occupant in the cell
         if self.occupant != null:
             if isinstance(self.occupant, GameCharacter):
-                print("%s %s%s \033[0m   ", self.color, ((
+                print("%s %s%s \033[0m   " % (self.color, (
                     GameCharacter.occupant).display(), self.color))
             else:
                 if isinstance(self.occupant, Trap):
-                    print("%s %s%s \033[0m   ", self.color,
-                          ((Trap.occupant).display(), self.color))
+                    print("%s %s%s \033[0m   " % (self.color,
+                                                  (Trap.occupant).display(), self.color))
         else:
-            print("%s   \033[0m   ", self.color)
+            print("%s   \033[0m   " % self.color)
         # END
 
 
