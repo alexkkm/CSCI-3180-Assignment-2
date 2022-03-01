@@ -72,7 +72,7 @@ class Mountain(Cell):
         self._color = '\033[1;37;47m'
 
     def set_occupant(self, obj):
-        # return False
+        # return false
         return false
         # END
 

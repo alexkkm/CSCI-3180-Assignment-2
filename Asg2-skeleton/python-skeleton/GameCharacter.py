@@ -103,6 +103,14 @@ class Player(GameCharacter):
             action = input("Next move (U, D, R, L): ".format(
                 self._row, self._col))
             # TODO: act method
+            for i in range(0, len(self._valid_actions)):
+                if self._valid_actions[i] == action:
+                    correct_act = true
+                    break
+            if not(correct_act):
+                print("Invalid command. Please enter one of {U, D, R, L}.%n")
+            else:
+                next_pos = self.cmd_to_pos(action)
 
             # END TODO
 

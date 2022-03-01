@@ -4,7 +4,7 @@ public class Goblin extends GameCharacter {
 	private char[] actions;
 	private int curAct;
 	private int damage;
-	
+
 	public Goblin(int row, int col, char[] actions) {
 		super(row, col);
 		this.actions = actions;
@@ -17,13 +17,13 @@ public class Goblin extends GameCharacter {
 	public int getDamage() {
 		return this.damage;
 	}
-	
+
 	@Override
 	public void act(Map map) {
 		char nextMove = this.actions[this.curAct % this.actions.length];
 		int[] nextPos = this.cmd2Pos(nextMove);
 		Cell nextCell = map.getCell(nextPos[0], nextPos[1]);
-		if(nextCell != null && nextCell.setOccupant(this)){
+		if (nextCell != null && nextCell.setOccupant(this)) {
 			this.curAct += 1;
 			this.row = nextPos[0];
 			this.col = nextPos[1];
@@ -35,12 +35,13 @@ public class Goblin extends GameCharacter {
 			this.occupying.removeOccupant();
 		}
 	}
-	
+
 	@Override
 	public boolean interactWith(Object comer) {
 		if (comer instanceof Player) {
-			((Player)comer).setHp(((Player)comer).getHp() - this.damage);
-			System.out.printf("\033[2;31mA goblin at cell ( %d %d ) meets Player.%nPlayer\'s HP -%d.\033[0m%n", this.row, this.col, this.damage);
+			((Player) comer).setHp(((Player) comer).getHp() - this.damage);
+			System.out.printf("\033[2;31mA goblin at cell ( %d %d ) meets Player.%nPlayer\'s HP -%d.\033[0m%n",
+					this.row, this.col, this.damage);
 			this.setActive(false);
 			return true;
 		}

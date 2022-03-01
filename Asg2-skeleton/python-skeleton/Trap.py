@@ -1,4 +1,7 @@
 # Duck Typing
+from sqlalchemy import false, true
+
+
 class Trap:
     def __init__(self, row, col):
         self._row = row
@@ -6,19 +9,35 @@ class Trap:
         self._occupying = None
         self._name = "Trap"
 
-    # TODO: _occupying get and setter
+    # _occupying get and setter
+    def get_occupying(self):
+        return self._occupying
 
-    # TODO: _name getter
+    def set_occupying(self, cell):
+        self._occupying = cell
+
+    # _name getter
+    def get_name(self):
+        return self._name
 
     def interact_with(self, comer):
-        # TODO: Add game logic.
-        if comer.name == "Goblin":
-            print("\033[1;31;43mA goblin entered a trap at (%d, %d)and died.\033[0;0m" % (self._row, self._col))
-            # TODO: Add game logic.
-        elif comer.name == "Player":
-            print("\033[1;31;43mYou entered a trap at (%d, %d)! HP - 1.\033[0;0m" % (self._row, self._col))
-            # TODO: Add game logic.
 
+        if comer.name == "Goblin":
+            print("\033[1;31;43mA goblin entered a trap at (%d, %d)and died.\033[0;0m" % (
+                self._row, self._col))
+            comer.set_active(false)
+            return false
+
+        elif comer.name == "Player":
+            print("\033[1;31;43mYou entered a trap at (%d, %d)! HP - 1.\033[0;0m" %
+                  (self._row, self._col))
+            comer.set_hp(comer.get_hp()-1)
+            comer.set_oxygen(comer.get_oxygen()-1)
+            return true
+
+        else:
+            return false
 
     def display(self):
-        # TODO: Add display logic.
+        # Add display logic.
+        return "\033[2;97m "

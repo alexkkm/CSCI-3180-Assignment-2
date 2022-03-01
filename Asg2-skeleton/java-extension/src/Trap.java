@@ -17,11 +17,11 @@ public class Trap {
 
 	public boolean interactWith(Object comer) {
 		if (comer instanceof Goblin) {
-			((Goblin)comer).setActive(false);
+			((Goblin) comer).setActive(false);
 			return false;
 		} else if (comer instanceof Player) {
-			((Player)comer).setHp(((Player)comer).getHp() - 1);
-			((Player)comer).setOxygen(((Player)comer).getOxygen() - 1);
+			((Player) comer).setHp(((Player) comer).getHp() - 1);
+			((Player) comer).setOxygen(((Player) comer).getOxygen() - 1);
 			return true;
 		} else {
 			return false;
@@ -31,11 +31,11 @@ public class Trap {
 	public String display() {
 		return "\033[2;97m ";
 	}
-	
+
 	public Cell getOccupying() {
 		return this.occupying;
 	}
-	
+
 	public String getName() {
 		return this.name;
 	}

@@ -36,7 +36,7 @@ class Map:
         if (row < 0 or row >= self._rows or col < 0 or col >= self._cols):  # condition
             print(
                 "\033[1;31;46mThe position (%d, %d) is out of boundary!\033[0;0m" % (row, col))
-            return False
+            return false
         else:
             self._cells[row][col] = cell
             return True

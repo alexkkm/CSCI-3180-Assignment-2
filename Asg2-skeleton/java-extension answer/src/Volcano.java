@@ -21,12 +21,12 @@ public class Volcano extends Mountain {
 			ArrayList<Cell> cells = map.getNeighbours(this.row, this.col);
 			for (int i = 0; i < cells.size(); ++i) {
 				Object occ = cells.get(i).getOccupant();
-				if(occ != null) {
+				if (occ != null) {
 					if (occ instanceof Goblin) {
-						((Goblin)occ).setActive(false);
-						((Goblin)occ).occupying.removeOccupant();
+						((Goblin) occ).setActive(false);
+						((Goblin) occ).occupying.removeOccupant();
 					} else if (occ instanceof Player) {
-						((Player)occ).setHp(((Player)occ).getHp() - 1);
+						((Player) occ).setHp(((Player) occ).getHp() - 1);
 					}
 				}
 			}

@@ -20,9 +20,9 @@ public class Volcano extends Mountain {
 			ArrayList<Cell> cells = map.getNeighbours(this.row, this.col);
 			for (int i = 0; i < cells.size(); ++i) {
 				Object occ = cells.get(i).getOccupant();
-				if(occ != null) {
+				if (occ != null) {
 					if (occ instanceof GameCharacter) {
-						((GameCharacter)occ).setActive(false);
+						((GameCharacter) occ).setActive(false);
 					}
 				}
 			}
