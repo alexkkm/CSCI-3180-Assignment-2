@@ -100,19 +100,35 @@ class Player(GameCharacter):
         next_cell = None
         next_pos = [0, 0]
         while next_cell == None:
-            action = input("Next move (U, D, R, L): ".format(
-                self._row, self._col))
-            # TODO: act method
-            for i in range(0, len(self._valid_actions)):
-                if self._valid_actions[i] == action:
-                    correct_act = true
-                    break
-            if not(correct_act):
-                print("Invalid command. Please enter one of {U, D, R, L}.%n")
-            else:
-                next_pos = self.cmd_to_pos(action)
+            while correct_act == false:
+                action = input("Next move (U, D, R, L): ".format(
+                    self._row, self._col))
+                next_act = action[0]
+                # act method
+                for i in range(0, len(self._valid_actions)):
+                    if self._valid_actions[i] == next_act:
+                        correct_act = true
+                        break
+                if(len(action) > 1):
+                    correct_act = false
+                if not(correct_act):
+                    print(
+                        "Invalid command. Please enter one of {U, D, R, L}.%n")
+                else:
+                    next_pos = self.cmd_to_pos(next_act)
 
-            # END TODO
+            next_cell = map.get_cell(next_pos[0], next_pos[1])
+            if(next_cell != null and next_cell.set_occupant(self)):
+                self._row = next_pos[0]
+                self._col = next_pos[1]
+                # need to check check the logic
+                self._oxygen -= self._occupying.get_hours(self)
+
+                self._occupying.remove_occupant()
+                self.set_occupying(next_cell)
+            else:
+                next_cell = null
+            # END
 
     # return whether comer entering the cell successfully or not
     def interact_with(self, comer):
