@@ -1,4 +1,3 @@
-from tables import Col
 from abc import abstractmethod
 
 
