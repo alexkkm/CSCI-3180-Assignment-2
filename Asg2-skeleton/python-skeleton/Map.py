@@ -17,7 +17,7 @@
  '''
 
 from xml.etree import ElementInclude
-from sqlalchemy import true
+from sqlalchemy import true, false
 
 from tables import Cols
 from Cell import Cell
@@ -30,14 +30,12 @@ class Map:
         self._cells = [[Cell() for x in range(cols)] for y in range(rows)]
 
     # rows getter
-    def get_rows(self){
+    def get_rows(self):
         return self._rows
-    }
 
     # cols getter
-    def get_cols(self){
+    def get_cols(self):
         return self._cols
-    }
 
     def get_cell(self, row, col):
         if (row < 0 or row >= self._rows or col < 0 or col >= self._cols):  # condition
