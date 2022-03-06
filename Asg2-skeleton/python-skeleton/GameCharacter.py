@@ -138,7 +138,6 @@ class Player(GameCharacter):
             if(next_cell != null and next_cell.set_occupant(self)):
                 self._row = next_pos[0]
                 self._col = next_pos[1]
-                # need to check check the logic
                 self._oxygen -= self._occupying.get_hours(self)
 
                 self._occupying.remove_occupant()
